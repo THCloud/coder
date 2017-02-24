@@ -18,6 +18,9 @@
 #ifndef C_GOODCODER_PARSE_BASE_TYPE_H
 #define C_GOODCODER_PARSE_BASE_TYPE_H
 
+#include <sstream>
+#include <string>
+
 namespace goodcoder {
 
 class ParseBaseType {
@@ -26,10 +29,25 @@ public:
     ~ParseBaseType();
 
     template <typename T>
-    void parse_column_to_base(const std::string& column, T* result);
+    void parse_column_to_base(const std::string& column, T* result) {
+        std::stringstream ss;
+        ss << column;
+        ss >> *result;
+    }
 
     template <typename T>
-    void parse_column_to_base_array(const std::string& column, T** result);
+    void parse_column_to_base_array(const std::string& column, T** result) {
+        std::vector<std::string> tmp_vec;
+        boost::split(column, ",", &tmp_vec);
+        int count = tmp_vec.size();
+        T* tmp_array = new T[count];
+        for (int i = 0; i < count; ++i) {
+            std::stringstream ss;
+            ss << tmp_vec[i];
+            ss >> tmp_array[i];
+        }
+        *result = tmp_array;
+    }
 };
 
 } // namespace goodcoder
