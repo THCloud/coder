@@ -27,11 +27,11 @@ DictHandler::DictHandler() {
 
 void DictHandler::split_line(const std::string& line,
                              const std::string& separator) {
-    boost::split(_columns, line, boost::is_any_of(separator));
+    split(line, separator, _columns);
 }
 
 ErrorCode DictHandler::check_valid(int index) {
-    size_t len = columns.size();
+    int len = columns.size();
     if (index > len) {
         return INDEX_OUT_OF_RANGE;
     }

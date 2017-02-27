@@ -25,8 +25,8 @@ namespace goodcoder {
 
 class ParseBaseType {
 public:
-    ParseBaseType();
-    ~ParseBaseType();
+    ParseBaseType() {}
+    ~ParseBaseType() {}
 
     template <typename T>
     void parse_column_to_base(const std::string& column, T* result) {
@@ -38,7 +38,7 @@ public:
     template <typename T>
     void parse_column_to_base_array(const std::string& column, T** result) {
         std::vector<std::string> tmp_vec;
-        boost::split(column, ",", &tmp_vec);
+        split(column, ",", &tmp_vec);
         int count = tmp_vec.size();
         T* tmp_array = new T[count];
         for (int i = 0; i < count; ++i) {

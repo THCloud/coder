@@ -28,7 +28,7 @@ struct UserType {
 
 ErrorCode user_function(const std::string& str, UserType* user_type) {
     std::vector<std::string> data;
-    boost::split(str, "|", &data);
+    split(str, "|", &data);
     if (data.size() != 3) {
         return TYPE_NOT_MATCH;
     }

@@ -41,12 +41,12 @@ public:
             return is_valid;
         }
 
-        ParseBaseType *parser = new ParseBaseType<T>();
+        ParseBaseType *parser = new ParseBaseType();
         if (parser == nullptr) {
             return MEMORY_ERROR;
         }
 
-        parser->parse_column_to_base(_columns[index], value);
+        parser->parse_column_to_base<T>(_columns[index], value);
         free(parser);
 
         return OK;
@@ -59,12 +59,12 @@ public:
             return is_valid;
         }
 
-        ParseBaseType *parser = new ParseBaseType<T>();
+        ParseBaseType *parser = new ParseBaseType();
         if (parser == nullptr) {
             return MEMORY_ERROR;
         }
 
-        parser->parse_column_to_base_array(_columns[index], value);
+        parser->parse_column_to_base_array<T>(_columns[index], value);
         free(parser);
 
         return OK;
