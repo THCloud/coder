@@ -28,7 +28,7 @@ namespace goodcoder {
 
 struct UserType {
     int int_val;
-    double double_val;
+    float float_val;
     char char_val;
 };
 
@@ -45,7 +45,7 @@ ErrorCode user_function(const std::string& str, UserType* user_type) {
     }
 
     parser->parse_column_to_base<int>(data[0], &user_type->int_val);
-    parser->parse_column_to_base<double>(data[1], &user_type->double_val);
+    parser->parse_column_to_base<float>(data[1], &user_type->float_val);
     parser->parse_column_to_base<char>(data[2], &user_type->char_val);
 
     free(parser);

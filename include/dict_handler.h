@@ -71,13 +71,15 @@ public:
     }
 
     template <typename T>
-    ErrorCode get_user_define_type(int index, T* value) {
+    ErrorCode get_user_define_type(int index,
+                                   T* value,
+                                   typename ParseUserDefineType<T>::UserFunc func) {
         ErrorCode is_valid = check_valid(index);
         if (is_valid != OK) {
             return is_valid;
         }
 
-        ParseUserDefineType<T> *parser = new ParseUserDefineType<T>();
+        ParseUserDefineType<T> *parser = new ParseUserDefineType<T>(func);
         if (parser == nullptr) {
             return MEMORY_ERROR;
         }

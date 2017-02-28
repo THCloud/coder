@@ -33,8 +33,7 @@ public:
 
     template <typename T>
     void parse_column_to_base(const std::string& column, T* result) {
-        std::stringstream ss;
-        ss << column;
+        std::istringstream ss(column);
         ss >> *result;
     }
 
@@ -45,8 +44,7 @@ public:
         int count = tmp_vec.size();
         T* tmp_array = new T[count];
         for (int i = 0; i < count; ++i) {
-            std::stringstream ss;
-            ss << tmp_vec[i];
+            std::istringstream ss(tmp_vec[i]);
             ss >> tmp_array[i];
         }
         *result = tmp_array;

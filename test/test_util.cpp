@@ -29,6 +29,6 @@ class TestUtilSuite : public ::testing::Test {
 TEST_F(TestUtilSuite, test_split) {
     std::string str = "test split function.";
     std::vector<std::string> val_vec;
-    goodcoder::split(str, " ", &val_vec);
+    goodcoder::Util::split(str, " ", &val_vec);
     ASSERT_EQ(3, val_vec.size());
 }

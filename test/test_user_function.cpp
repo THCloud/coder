@@ -31,6 +31,6 @@ TEST_F(TestUserFunctionSuite, test_user_function) {
     std::string test_data = "123|1.23|a";
     goodcoder::user_function(test_data, &user_type);
     ASSERT_EQ(123, user_type.int_val);
-    ASSERT_EQ(1.23, user_type.double_val);
+    ASSERT_NEAR(1.23, user_type.float_val, 0.001);
     ASSERT_EQ('a', user_type.char_val);
 }

@@ -50,11 +50,8 @@ int main(int argc, char** argv) {
     goodcoder::ErrorCode ret = goodcoder::OK;
     goodcoder::DictHandler dict_handler;
 
-    goodcoder::ParseUserDefineType<goodcoder::UserType> user_type_parser;
-    user_type_parser.set_user_function(&goodcoder::user_function);
-
     while (std::getline(input_fstream, line)) {
-        dict_handler.split_line(line, " ");
+        dict_handler.split_line(line, "\t");
 
         int int_val = 0;
         ret = dict_handler.get_value<int>(0, &int_val);
@@ -63,41 +60,42 @@ int main(int argc, char** argv) {
         }
         std::cout << "get int value is " << int_val << std::endl;
 
-        char char_val = 0;
-        ret = dict_handler.get_value<char>(1, &char_val);
+        float float_val = 0;
+        ret = dict_handler.get_value<float>(1, &float_val);
         if (ret != goodcoder::OK) {
             continue;
         }
-        std::cout << "get char value is " << char_val << std::endl;
+        std::cout << "get float value is " << float_val << std::endl;
 
-        double double_val = 0;
-        ret = dict_handler.get_value<double>(2, &double_val);
-        if (ret != goodcoder::OK) {
-            continue;
-        }
-        std::cout << "get double value is " << double_val << std::endl;
-
-        char* str_val = NULL;
-        ret = dict_handler.get_value<char*>(3, &str_val);
+        char* str_val = new char[256];
+        ret = dict_handler.get_value<char*>(2, &str_val);
         if (ret != goodcoder::OK) {
             continue;
         }
         std::cout << "get str value is " << str_val << std::endl;
+        delete str_val;
 
         char *arr_val = NULL;
-        ret = dict_handler.get_value_array<char>(4, &arr_val);
+        ret = dict_handler.get_value_array<char>(3, &arr_val);
         if (ret != goodcoder::OK) {
             continue;
         }
+        std::cout << "get arrary value is ";
+        for (int i = 0; i < sizeof(arr_val) / sizeof(arr_val[0]); i++) {
+            std::cout << arr_val[i] << " ";
+        }
+        std::cout << std::endl;
 
         goodcoder::UserType user_type;
-        ret = dict_handler.get_user_define_type<goodcoder::UserType>(5, &user_type);
+        ret = dict_handler.get_user_define_type<goodcoder::UserType>(4,
+                                                                     &user_type,
+                                                                     &goodcoder::user_function);
         if (ret != goodcoder::OK) {
             continue;
         }
         std::cout << "get user type value is {" << std::endl
                   << user_type.int_val << std::endl
-                  << user_type.double_val << std::endl
+                  << user_type.float_val << std::endl
                   << user_type.char_val << std::endl
                   << "}" << std::endl;
     }
