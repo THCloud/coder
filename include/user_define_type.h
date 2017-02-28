@@ -18,6 +18,12 @@
 #ifndef C_GOODCODER_USER_DEFINE_TYPE_H
 #define C_GOODCODER_USER_DEFINE_TYPE_H
 
+#include <string>
+#include <vector>
+
+#include "parse_base_type.h"
+#include "util.h"
+
 namespace goodcoder {
 
 struct UserType {
@@ -28,13 +34,13 @@ struct UserType {
 
 ErrorCode user_function(const std::string& str, UserType* user_type) {
     std::vector<std::string> data;
-    split(str, "|", &data);
+    Util::split(str, "|", &data);
     if (data.size() != 3) {
         return TYPE_NOT_MATCH;
     }
 
     ParseBaseType *parser = new ParseBaseType();
-    if (int_parser == nullptr) {
+    if (parser == nullptr) {
         return MEMORY_ERROR;
     }
 

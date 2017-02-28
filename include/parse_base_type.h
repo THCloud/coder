@@ -20,6 +20,9 @@
 
 #include <sstream>
 #include <string>
+#include <vector>
+
+#include "util.h"
 
 namespace goodcoder {
 
@@ -38,7 +41,7 @@ public:
     template <typename T>
     void parse_column_to_base_array(const std::string& column, T** result) {
         std::vector<std::string> tmp_vec;
-        split(column, ",", &tmp_vec);
+        Util::split(column, ",", &tmp_vec);
         int count = tmp_vec.size();
         T* tmp_array = new T[count];
         for (int i = 0; i < count; ++i) {

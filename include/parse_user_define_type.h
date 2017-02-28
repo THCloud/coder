@@ -18,6 +18,9 @@
 #ifndef C_GOODCODER_PARSE_USER_DEFINE_TYPE_H
 #define C_GOODCODER_PARSE_USER_DEFINE_TYPE_H
 
+#include <string>
+#include "util.h"
+
 namespace goodcoder {
 
 template <typename T>
@@ -37,7 +40,8 @@ private:
     static UserFunc _s_func;
 };
 
-static ParseUserDefineType<T>::_s_has_func = false;
+template <typename T>
+bool ParseUserDefineType<T>::_s_has_func = false;
 
 template <typename T>
 ErrorCode ParseUserDefineType<T>::parse_user_define_type(const std::string& str,
@@ -51,7 +55,7 @@ ErrorCode ParseUserDefineType<T>::parse_user_define_type(const std::string& str,
 
 template <typename T>
 void ParseUserDefineType<T>::set_user_function(ParseUserDefineType<T>::UserFunc func) {
-    _s_has_func = true;
+    ParseUserDefineType<T>::_s_has_func = true;
     _s_func = func;
 }
 

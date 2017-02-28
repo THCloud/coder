@@ -22,20 +22,20 @@ namespace goodcoder {
 DictHandler::DictHandler() {
 }
 
-~DictHandler::DictHandler() {
+DictHandler::~DictHandler() {
 }
 
 void DictHandler::split_line(const std::string& line,
                              const std::string& separator) {
-    split(line, separator, _columns);
+    Util::split(line, separator, &_columns);
 }
 
 ErrorCode DictHandler::check_valid(int index) {
-    int len = columns.size();
+    int len = _columns.size();
     if (index > len) {
         return INDEX_OUT_OF_RANGE;
     }
-    std::string value = columns[index];
+    std::string value = _columns[index];
     if (value.empty()) {
         return IS_EMPTY_STR;
     }

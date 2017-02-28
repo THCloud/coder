@@ -77,7 +77,7 @@ public:
             return is_valid;
         }
 
-        ParseUserDefineType *parser = new ParseUserDefineType<T>();
+        ParseUserDefineType<T> *parser = new ParseUserDefineType<T>();
         if (parser == nullptr) {
             return MEMORY_ERROR;
         }
