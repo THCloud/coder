@@ -31,12 +31,25 @@ public:
     ParseBaseType() {}
     ~ParseBaseType() {}
 
+    /**
+     * @brief   parse the target column to base type.
+     *          base type is like int, float, char, and so on.
+     * @param   <column>       [in]   the value of the column.
+     *          <result>       [out]  the target of specified type.
+     * @return  null.
+     **/
     template <typename T>
     void parse_column_to_base(const std::string& column, T* result) {
         std::istringstream ss(column);
         ss >> *result;
     }
 
+    /**
+     * @brief   parse the target column to built-in array.
+     * @param   <column>       [in]   the value of the column.
+     *          <result>       [out]  the target ptr of array. this should be a 2d ptr.
+     * @return  null.
+     **/
     template <typename T>
     void parse_column_to_base_array(const std::string& column, T** result) {
         std::vector<std::string> tmp_vec;

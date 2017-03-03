@@ -28,33 +28,38 @@ class ParseUserDefineType {
 public:
     typedef ErrorCode (*UserFunc)(const std::string&, T*);
 
+    /**
+     * @brief   constructor.
+     * @param   <func>      [in]   the specified parse function that user given.
+     * @return  null.
+     **/
     ParseUserDefineType(UserFunc func) {
         _s_func = func;
     }
     ~ParseUserDefineType() {}
 
-    ErrorCode parse_user_define_type(const std::string& str, T* result) {
-        ErrorCode ret = _s_func(str, result);
-        return OK;
+    /**
+     * @brief   parse column to user define type. with user function.
+     * @param   <column>         [in]   target column.
+     *          <result>         [out]  target user define type. this should be a ptr.
+     * @return  ErrorCode:
+     *          OK:              parse success.
+     *          TYPE_NOT_MATCH:  target column is not math the user define type. (input error)
+     *          MEMORY_ERROR:    memory error when new. (program error)
+     **/
+    ErrorCode parse_user_define_type(const std::string& column, T* result) {
+        ErrorCode ret = _s_func(column, result);
+        return ret;
     }
 
-    // void set_user_function(ParseUserDefineType<T>::UserFunc func) {
-    //     ParseUserDefineType<T>::_s_has_func = true;
-    //     _s_func = func;
-    // }
 
 private:
-    // static bool _s_has_func;
+
+    /**
+     * @breif the specified parse function that user given.
+     */
     UserFunc _s_func;
 };
-
-// template <typename T>
-// bool ParseUserDefineType<T>::_s_has_func = false;
-
-
-// template <typename T>
-// void ParseUserDefineType<T>::set_user_function(ParseUserDefineType<T>::UserFunc func) {
-// }
 
 } // namespace goodcoder
 

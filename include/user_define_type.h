@@ -26,12 +26,21 @@
 
 namespace goodcoder {
 
+/**
+ * @brief   user define type.
+ **/
 struct UserType {
     int int_val;
     float float_val;
     char char_val;
 };
 
+/**
+ * @brief   parse function that user given.
+ * @param   <str>          [in]    target string value.
+ *          <user_type>    [out]   target user define type. this should be a ptr.
+ * @return
+ **/
 ErrorCode user_function(const std::string& str, UserType* user_type) {
     std::vector<std::string> data;
     Util::split(str, "|", &data);

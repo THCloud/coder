@@ -18,34 +18,18 @@
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
+#include <gflags/gflags.h>
+
 #include "dict_handler.h"
 #include "user_define_type.h"
 
+DEFINE_string(file, "./test_file", "target parse dict file.");
+
 int main(int argc, char** argv) {
-    std::string opt_string = "f:h";
-    char option = '\0';
 
-    std::string input_file;
+    google::ParseCommandLineFlags(&argc, &argv, true);
 
-    while ((option = getopt(argc, argv, opt_string.c_str())) != -1) {
-        switch (option) {
-            case 'f':
-                input_file = optarg;
-                break;
-            case 'h':
-                LOG_INFO("Usage: ./dict_parse_demo -f <file_name>");
-                exit(EXIT_SUCCESS);
-            default:
-                LOG_INFO("Usage: ./dict_parse_demo -f <file_name>");
-                exit(EXIT_SUCCESS);
-        }
-    }
-    if (input_file.empty()) {
-        LOG_INFO("Usage: ./dict_parse_demo -f <file_name>");
-        exit(EXIT_FAILURE);
-    }
-
-    std::ifstream input_fstream(input_file);
+    std::ifstream input_fstream(FLAGS_file);
     std::string line;
     goodcoder::ErrorCode ret = goodcoder::OK;
     goodcoder::DictHandler dict_handler;

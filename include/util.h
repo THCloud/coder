@@ -39,7 +39,16 @@ class Util {
 public:
     Util();
     ~Util();
-    static void split(const std::string& str, const std::string& separator,
+
+    /**
+     * @brief   implement of split function like python.
+     * @param   <str>         [in]  target split string.
+     *          <separator>   [in]  separator.
+     *          <ret>         [out] the result. this should be a ptr of string vector.
+     * @return  null.
+     **/
+    static void split(const std::string& str,
+                      const std::string& separator,
                       std::vector<std::string>* ret);
 };
 

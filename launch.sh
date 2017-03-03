@@ -11,7 +11,7 @@ function log_info()
 function log_error()
 {
     local message="$1"
-    echo -e "\e[1;31m[ERROR]\e[m" ${message}    
+    echo -e "\e[1;31m[ERROR]\e[m" ${message}
 }
 
 function build_src_and_test()
@@ -27,14 +27,12 @@ function build_src_and_test()
 function run_demo()
 {
     build_src_and_test
-    ./dict_handler_demo -f ../test_data/test_file
+    cp ../test_data/test_file .
+    ./dict_parse_demo -file ./test_file
 
-    local status="echo $?"
-    if [ ${status} -ne "0" ]; then
-        log_error "exit with error"
-    else
-        log_info "finished."
-    fi
+    [[ $? -ne 0 ]] && log_error "exit with error" || log_info "finished."
+
+    rm ./test_file
 }
 
 function run_tests()
