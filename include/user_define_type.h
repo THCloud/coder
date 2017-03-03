@@ -11,7 +11,8 @@
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 11:14:52
- * @brief
+ * @brief  statements of user-define type and user-define parse function.
+ *         this file should be edit by user.
  *
  **/
 

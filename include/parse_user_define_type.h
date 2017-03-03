@@ -11,7 +11,7 @@
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 19:24:56
- * @brief
+ * @brief  parse string to user define type.
  *
  **/
 

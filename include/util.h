@@ -11,7 +11,7 @@
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 11:03:36
- * @brief
+ * @brief  common function and constant statement.
  *
  **/
 

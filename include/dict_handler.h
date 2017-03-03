@@ -11,7 +11,7 @@
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 11:01:40
- * @brief
+ * @brief  main dict handler class. expose to user.
  *
  **/
 
