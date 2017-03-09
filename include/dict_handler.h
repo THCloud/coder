@@ -45,7 +45,7 @@ public:
 
     /**
      * @brief   parse the target index column to specified type.
-     * @param   <index>        [in]  target index of column.
+     * @param   <column>       [in]  target column value.
      *          <value>        [out] the specified type value of column.
      * @return  Errorcode:
      *          OK:                 parse success.
@@ -66,7 +66,7 @@ public:
 
     /**
      * @brief   parse the target index column to array.
-     * @param   <index>        [in]  target index of column.
+     * @param   <column>       [in]  target column value.
      *          <value>        [out] the vector of specified type.
      *          <separator>    [in]  separator of column. default is ",".
      * @return  Errorcode:
@@ -90,7 +90,7 @@ public:
 
     /**
      * @brief   parse the target index column to user define type.
-     * @param   <index>        [in]  target index of column.
+     * @param   <column>       [in]  target column value.
      *          <value>        [out] the target of user define type.
      *          <func>         [in]  user specified parse function.
      * @return  Errorcode:
