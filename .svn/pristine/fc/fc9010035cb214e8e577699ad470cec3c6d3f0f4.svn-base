@@ -31,7 +31,7 @@ public:
 
     virtual void SetUp() {
         _parse_user_type = new goodcoder::ParseUserDefineType
-                            <user::UserType>(&user::user_function);
+                            <goodcoder::UserType>(&goodcoder::user_function);
     }
 
     virtual void TearDown() {
@@ -42,11 +42,11 @@ public:
     }
 
 public:
-    goodcoder::ParseUserDefineType<user::UserType> *_parse_user_type;
+    goodcoder::ParseUserDefineType<goodcoder::UserType> *_parse_user_type;
 };
 
 TEST_F(TestParseUserDefineTypeSuite, test_parse_user_define_type) {
-    user::UserType user_type;
+    goodcoder::UserType user_type;
     std::string test_data = "123|1.23|a";
     _parse_user_type->parse_user_define_type(test_data, &user_type);
     ASSERT_EQ(123, user_type.int_val);

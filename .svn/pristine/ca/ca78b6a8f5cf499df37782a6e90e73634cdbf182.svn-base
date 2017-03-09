@@ -27,7 +27,7 @@ set(DICT_PARSE_SRC
 
 add_executable(
     dict_parse_demo
-    ${CMAKE_SOURCE_DIR}/demo/dict_parse_demo.cpp
+    ${CPP_SOURCE_DIR}/dict_parse_demo.cpp
     ${DICT_PARSE_SRC}
 )
 target_link_libraries(dict_parse_demo gflags)

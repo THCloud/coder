@@ -48,7 +48,7 @@ public:
     /**
      * @brief   parse the target column to array. use vector.
      * @param   <column>       [in]   the value of the column.
-     *          <result>       [out]  target vector to output.
+     *          <result>       [out]  the target ptr of array. this should be a vector.
      *          <separator>    [in]   separator of the column. default is ",".
      * @return  null.
      **/
@@ -57,7 +57,7 @@ public:
                               std::vector<T>& result,
                               const std::string& separator = ",") {
         std::vector<std::string> tmp_vec;
-        Util::split(column, separator, tmp_vec);
+        Util::split(column, separator, &tmp_vec);
         for (int i = 0; i < tmp_vec.size(); ++i) {
             std::stringstream ss;
             T tmp_t;

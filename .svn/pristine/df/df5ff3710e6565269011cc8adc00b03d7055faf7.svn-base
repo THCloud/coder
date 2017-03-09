@@ -51,7 +51,7 @@ TEST_F(TestParseBaseTypeSuite, test_parse_int_and_double) {
     _base_parser->parse_column_to_base<int>(test_int, &int_val);
     ASSERT_EQ(123, int_val);
 
-    float float_val = 0.0f;
+    float float_val = 0.0;
     _base_parser->parse_column_to_base<float>(test_float, &float_val);
     ASSERT_NEAR(1.23, float_val, 0.001);
 
