@@ -29,7 +29,7 @@ function run_demo()
     build_src_and_test
     cp ../test_data/test_file .
     cp ../conf/typelist .
-    ./dict_parse_demo -dict_file ./test_file -type_file ./typelist
+    ./dict_parse_demo -flagfile=../conf/goodcoder.gflags
 
     [[ $? -ne 0 ]] && log_error "exit with error" || log_info "finished."
 

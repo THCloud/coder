@@ -58,7 +58,7 @@ public:
                               const std::string& separator = ",") {
         std::vector<std::string> tmp_vec;
         Util::split(column, separator, tmp_vec);
-        for (int i = 0; i < tmp_vec.size(); ++i) {
+        for (std::size_t i = 0; i < tmp_vec.size(); ++i) {
             std::stringstream ss;
             T tmp_t;
             ss << tmp_vec[i];

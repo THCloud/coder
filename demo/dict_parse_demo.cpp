@@ -19,6 +19,7 @@
 #include <fstream>
 #include <unistd.h>
 #include <gflags/gflags.h>
+#include <glog/logging.h>
 
 #include "dict_handler.h"
 #include "user_define_type.h"
@@ -28,7 +29,10 @@ DEFINE_string(type_file, "./typelist", "define dict struct of each line.");
 
 int main(int argc, char** argv) {
 
+    // init gflags.
     google::ParseCommandLineFlags(&argc, &argv, true);
+    // init glog.
+    google::InitGoogleLogging(argv[0]);
 
     std::ifstream dict_fstream(FLAGS_dict_file);
     std::string line;
@@ -53,6 +57,8 @@ int main(int argc, char** argv) {
             }
         }
     }
+
+    google::ShutdownGoogleLogging();
 
     return 0;
 }

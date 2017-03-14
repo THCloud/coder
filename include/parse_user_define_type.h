@@ -52,7 +52,7 @@ public:
 
 private:
 
-    // @breif the specified parse function that user given.
+    // the specified parse function that user given.
     UserFunc _s_func;
 };
 
