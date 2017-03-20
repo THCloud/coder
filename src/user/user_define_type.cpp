@@ -40,6 +40,22 @@ goodcoder::ErrorCode user_function(const std::string& str, UserType* user_type) 
     return goodcoder::OK;
 }
 
+void get_typelist(const std::string& type_file,
+                  std::vector<std::string>& typelist) {
+    // get dict struct from target file. Read the type_file
+    // line by line, and save the type to typelist.
+    // for more detail of type_file, look at the statements of header file.
+    LOG(INFO) << "target file name that saved dict struct: " << type_file;
+
+    std::ifstream type_fstream(type_file);
+    std::string type;
+    while (std::getline(type_fstream, type)) {
+        LOG(INFO) << "get type: " << type;
+        typelist.push_back(type);
+    }
+    type_fstream.close();
+}
+
 goodcoder::ErrorCode get_value(const std::string& type,
                                const std::string& column) {
     goodcoder::DictHandler dict_handler;
@@ -75,8 +91,6 @@ goodcoder::ErrorCode get_value(const std::string& type,
             for (std::size_t i = 0; i < arr_val.size(); ++i) {
                 LOG(INFO) << arr_val[i] << " ";
             }
-        } else {
-            goodcoder::DictHandler::print_error_info(ret);
         }
     } else if (type.compare("UserType") == 0) {
         UserType* user_type = new UserType();

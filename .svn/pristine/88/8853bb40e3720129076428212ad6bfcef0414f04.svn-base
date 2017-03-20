@@ -58,7 +58,7 @@ ErrorCode user_function(const std::string& str, UserType* user_type) {
     parser->parse_column_to_base<float>(data[1], &user_type->float_val);
     parser->parse_column_to_base<char>(data[2], &user_type->char_val);
 
-    free(parser);
+    delete parser;
     return OK;
 }
 

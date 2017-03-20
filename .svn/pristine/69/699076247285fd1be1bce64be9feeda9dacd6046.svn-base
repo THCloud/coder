@@ -32,9 +32,11 @@ int main(int argc, char** argv) {
     std::ifstream input_fstream(FLAGS_file);
     std::string line;
     goodcoder::ErrorCode ret = goodcoder::OK;
-    goodcoder::DictHandler dict_handler;
+    int line_count = 0;
 
     while (std::getline(input_fstream, line)) {
+        ++line_count;
+        goodcoder::DictHandler dict_handler;
         dict_handler.split_line(line, "\t");
 
         int int_val = 0;
@@ -59,29 +61,30 @@ int main(int argc, char** argv) {
         std::cout << "get str value is " << str_val << std::endl;
         delete str_val;
 
-        char *arr_val = NULL;
-        ret = dict_handler.get_value_array<char>(3, &arr_val);
+        std::vector<char> arr_val;
+        ret = dict_handler.get_value<char>(3, arr_val);
         if (ret != goodcoder::OK) {
             continue;
         }
         std::cout << "get arrary value is ";
-        for (int i = 0; i < sizeof(arr_val) / sizeof(arr_val[0]); i++) {
+        for (int i = 0; i < arr_val.size(); ++i) {
             std::cout << arr_val[i] << " ";
         }
         std::cout << std::endl;
 
-        goodcoder::UserType user_type;
+        goodcoder::UserType* user_type = new goodcoder::UserType();
         ret = dict_handler.get_user_define_type<goodcoder::UserType>(4,
-                                                                     &user_type,
+                                                                     user_type,
                                                                      &goodcoder::user_function);
         if (ret != goodcoder::OK) {
             continue;
         }
         std::cout << "get user type value is {" << std::endl
-                  << user_type.int_val << std::endl
-                  << user_type.float_val << std::endl
-                  << user_type.char_val << std::endl
-                  << "}" << std::endl;
+                  << user_type->int_val << std::endl
+                  << user_type->float_val << std::endl
+                  << user_type->char_val << std::endl
+                  << "}" << std::endl << std::endl;
+        delete user_type;
     }
 
     return 0;
