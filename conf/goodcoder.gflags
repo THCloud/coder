@@ -1,0 +1,3 @@
+-dict_file=test_file
+-type_file=typelist
+-log_dir=../log

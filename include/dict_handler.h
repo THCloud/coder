@@ -4,13 +4,12 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   dict_handler.h
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 11:01:40
+ *
  * @brief  main dict handler class. expose to user.
  *
  **/
@@ -19,6 +18,7 @@
 #define C_GOODCODER_DICT_HANDLER_H
 
 #include <string>
+#include <vector>
 
 #include "parse_base_type.h"
 #include "parse_user_define_type.h"
@@ -33,120 +33,113 @@ public:
 
     /**
      * @brief   split line to part. like split() function in python.
-     *          this is the first step to parse the dict, and will
-     *          save each column of line in private variable.
+     *          this function is expose to user, to split line to column.
      * @param   <line>        [in]   target line.
-     * @param   <separator>   [in]   target separator.
+     *          <separator>   [in]   target separator.
+     *          <target>      [out]  target vector to save the splited.
      * @return  null.
      **/
-    void split_line(const std::string& line,
-                    const std::string& separator);
+    static void split_line(const std::string& line,
+                           const std::string& separator,
+                           std::vector<std::string>& target);
+
+    /**
+    * @brief   to parse dict struct file, and save all types in a vector.
+    *          type_file should write each column's type to each line.
+    *          for example. if target dict struct is :
+    *
+    *              int    float     char    usertype
+    *
+    *          then the type_file should be like this:
+    *
+    *              int
+    *              float
+    *              char
+    *              usertype
+    *
+    * @param   <type_file>     [in]   target file name that defined dict struct.
+    *          <typelist>      [out]  vector to save each type.
+    * @return  null.
+    **/
+    static void get_typelist(const std::string& type_file,
+                             std::vector<std::string>& typelist);
+
+    /**
+     * @brief   print error info according error code.
+     * @param   <error_code>        [in]    target error code.
+     * @return  none.
+     **/
+    static void print_error_info(ErrorCode error_code);
 
     /**
      * @brief   parse the target index column to specified type.
-     * @param   <index>        [in]  target index of column.
+     * @param   <column>       [in]  target column value.
      *          <value>        [out] the specified type value of column.
      * @return  Errorcode:
      *          OK:                 parse success.
      *          MEMORY_ERROR:       memory error when new the ptr. (program error)
-     *          INDEX_OUT_OF_RANGE: target index is invalid. (input error)
-     *          IS_EMPTY_STR:       target index column is empty. (input error)
      **/
     template <typename T>
-    ErrorCode get_value(int index, T* value) {
-        ErrorCode is_valid = check_valid(index);
-        if (is_valid != OK) {
-            return is_valid;
-        }
-
+    ErrorCode get_value(const std::string& column, T* value) {
         ParseBaseType *parser = new ParseBaseType();
         if (parser == nullptr) {
             return MEMORY_ERROR;
         }
 
-        parser->parse_column_to_base<T>(_columns[index], value);
-        free(parser);
+        parser->parse_column_to_base<T>(column, value);
+        delete parser;
 
         return OK;
     }
 
     /**
-     * @brief   parse the target index column to built-in array.
-     * @param   <index>        [in]  target index of column.
-     *          <value>        [out] the target array of specified type.
+     * @brief   parse the target index column to array.
+     * @param   <column>       [in]  target column value.
+     *          <value>        [out] the vector of specified type.
+     *          <separator>    [in]  separator of column. default is ",".
      * @return  Errorcode:
      *          OK:                 parse success.
      *          MEMORY_ERROR:       memory error when new the ptr. (program error)
-     *          INDEX_OUT_OF_RANGE: target index is invalid. (input error)
-     *          IS_EMPTY_STR:       target index column is empty. (input error)
      **/
     template <typename T>
-    ErrorCode get_value_array(int index, T** value) {
-        ErrorCode is_valid = check_valid(index);
-        if (is_valid != OK) {
-            return is_valid;
-        }
-
+    ErrorCode get_value(const std::string& column,
+                        std::vector<T>& value,
+                        const std::string& separator = ",") {
         ParseBaseType *parser = new ParseBaseType();
         if (parser == nullptr) {
             return MEMORY_ERROR;
         }
 
-        parser->parse_column_to_base_array<T>(_columns[index], value);
-        free(parser);
+        parser->parse_column_to_base<T>(column, value, separator);
+        delete parser;
 
         return OK;
     }
 
     /**
      * @brief   parse the target index column to user define type.
-     * @param   <index>        [in]  target index of column.
+     * @param   <column>       [in]  target column value.
      *          <value>        [out] the target of user define type.
      *          <func>         [in]  user specified parse function.
      * @return  Errorcode:
      *          OK:                 parse success.
      *          MEMORY_ERROR:       memory error when new the ptr. (program error)
-     *          INDEX_OUT_OF_RANGE: target index is invalid. (input error)
-     *          IS_EMPTY_STR:       target index column is empty. (input error)
      **/
     template <typename T>
-    ErrorCode get_user_define_type(int index,
+    ErrorCode get_user_define_type(const std::string& column,
                                    T* value,
                                    typename ParseUserDefineType<T>::UserFunc func) {
-        ErrorCode is_valid = check_valid(index);
-        if (is_valid != OK) {
-            return is_valid;
-        }
-
         ParseUserDefineType<T> *parser = new ParseUserDefineType<T>(func);
         if (parser == nullptr) {
             return MEMORY_ERROR;
         }
 
-        ErrorCode ret = parser->parse_user_define_type(_columns[index], value);
-        free(parser);
+        ErrorCode ret = parser->parse_user_define_type(column, value);
+        delete parser;
 
         return ret;
     }
 
-private:
-
-    /**
-     * @brief   check whether the target index is valid.
-     * @param   <index>       [in]   target index of column.
-     * @return  ErrorCode:
-     *          OK:                 the index and the value is valid.
-     *          IS_EMPTY_STR:       the column is an empty str.
-     *          INDEX_OUT_OF_RANGE: the index is not valid.
-     **/
-    ErrorCode check_valid(int index);
-
-private:
-
-    /**
-     * @brief   storage each column of the dict.
-     */
-    std::vector<std::string> _columns;
 };
 
 } // namespace goodcoder

@@ -4,13 +4,12 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   parse_user_define_type.h
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 19:24:56
+ *
  * @brief  parse string to user define type.
  *
  **/
@@ -33,9 +32,7 @@ public:
      * @param   <func>      [in]   the specified parse function that user given.
      * @return  null.
      **/
-    ParseUserDefineType(UserFunc func) {
-        _s_func = func;
-    }
+    ParseUserDefineType(UserFunc func) : _s_func(func) {}
     ~ParseUserDefineType() {}
 
     /**
@@ -52,12 +49,9 @@ public:
         return ret;
     }
 
-
 private:
 
-    /**
-     * @breif the specified parse function that user given.
-     */
+    // the specified parse function that user given.
     UserFunc _s_func;
 };
 

@@ -4,13 +4,12 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   util.h
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 11:03:36
+ *
  * @brief  common function and constant statement.
  *
  **/
@@ -32,7 +31,8 @@ typedef enum {
     TYPE_NOT_FOUND,
     IS_EMPTY_STR,
     INDEX_OUT_OF_RANGE,
-    MEMORY_ERROR
+    MEMORY_ERROR,
+    COLUMN_NUM_NOT_MATCH
 } ErrorCode;
 
 class Util {
@@ -44,12 +44,12 @@ public:
      * @brief   implement of split function like python.
      * @param   <str>         [in]  target split string.
      *          <separator>   [in]  separator.
-     *          <ret>         [out] the result. this should be a ptr of string vector.
+     *          <ret>         [out] the result vector.
      * @return  null.
      **/
     static void split(const std::string& str,
                       const std::string& separator,
-                      std::vector<std::string>* ret);
+                      std::vector<std::string>& ret);
 };
 
 } // namespace goodcoder

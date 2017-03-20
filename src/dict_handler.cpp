@@ -4,18 +4,21 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   dict_handler.cpp
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 11:13:14
+ *
  * @brief
  *
  **/
 
 #include "dict_handler.h"
+
+#include <glog/logging.h>
+#include <fstream>
+#include <iostream>
 
 namespace goodcoder {
 
@@ -26,20 +29,62 @@ DictHandler::~DictHandler() {
 }
 
 void DictHandler::split_line(const std::string& line,
-                             const std::string& separator) {
-    Util::split(line, separator, &_columns);
+                             const std::string& separator,
+                             std::vector<std::string>& target) {
+    Util::split(line, separator, target);
 }
 
-ErrorCode DictHandler::check_valid(int index) {
-    int len = _columns.size();
-    if (index > len) {
-        return INDEX_OUT_OF_RANGE;
+void DictHandler::get_typelist(const std::string& type_file,
+                               std::vector<std::string>& typelist) {
+    // get dict struct from target file. Read the type_file
+    // line by line, and save the type to typelist.
+    // for more detail of type_file, look at the statements of header file.
+    LOG(INFO) << "target file name that saved dict struct: " << type_file;
+
+    std::ifstream type_fstream(type_file);
+    std::string type;
+    while (std::getline(type_fstream, type)) {
+        LOG(INFO) << "get type: " << type;
+        if (!type.empty()) {
+            typelist.push_back(type);            
+        }
     }
-    std::string value = _columns[index];
-    if (value.empty()) {
-        return IS_EMPTY_STR;
+    type_fstream.close();
+}
+
+void DictHandler::print_error_info(ErrorCode error_code) {
+    switch (error_code) {
+        case TYPE_NOT_MATCH: {
+            LOG(ERROR) << "ErrorInfo: target parse data is not match target parse type";
+            break;
+        }
+        case TYPE_NOT_FOUND: {
+            LOG(ERROR) << "ErrorInfo: didn't found matched parse type.";
+            break;
+        }
+        case IS_EMPTY_STR: {
+            LOG(ERROR) << "ErrorInfo: target access data value is an empty string";
+            break;
+        }
+        case INDEX_OUT_OF_RANGE: {
+            LOG(ERROR) << "ErrorInfo: target access index is out of range.";
+            break;
+        }
+        case MEMORY_ERROR: {
+            LOG(ERROR) << "ErrorInfo: error when alloc memory to ptr.";
+            break;
+        }
+        case COLUMN_NUM_NOT_MATCH: {
+            LOG(ERROR) << "ErrorInfo: source data's columns is not matched target columns.";
+            break;
+        }
+        case OK: {
+            break;
+        }
+        default: {
+            break;
+        }
     }
-    return OK;
 }
 
 } // namespace goodcoder
