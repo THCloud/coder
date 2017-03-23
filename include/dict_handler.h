@@ -4,13 +4,12 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   dict_handler.h
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 11:01:40
+ *
  * @brief  main dict handler class. expose to user.
  *
  **/
@@ -19,6 +18,7 @@
 #define C_GOODCODER_DICT_HANDLER_H
 
 #include <string>
+#include <vector>
 
 #include "parse_base_type.h"
 #include "parse_user_define_type.h"
@@ -42,6 +42,27 @@ public:
     static void split_line(const std::string& line,
                            const std::string& separator,
                            std::vector<std::string>& target);
+
+    /**
+    * @brief   to parse dict struct file, and save all types in a vector.
+    *          type_file should write each column's type to each line.
+    *          for example. if target dict struct is :
+    *
+    *              int    float     char    usertype
+    *
+    *          then the type_file should be like this:
+    *
+    *              int
+    *              float
+    *              char
+    *              usertype
+    *
+    * @param   <type_file>     [in]   target file name that defined dict struct.
+    *          <typelist>      [out]  vector to save each type.
+    * @return  null.
+    **/
+    static void get_typelist(const std::string& type_file,
+                             std::vector<std::string>& typelist);
 
     /**
      * @brief   parse the target index column to specified type.

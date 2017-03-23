@@ -4,14 +4,13 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   test_parse_base_type.cpp
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/27 13:04:43
- * @brief
+ *
+ * @brief  unit test for parse_base_type.h
  *
  **/
 

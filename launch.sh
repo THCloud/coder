@@ -24,12 +24,18 @@ function build_src_and_test()
     make -j8
 }
 
+function clear_log()
+{
+    rm ${ROOT_PATH}/log/*
+}
+
 function run_demo()
 {
     build_src_and_test
+    clear_log
     cp ../test_data/test_file .
     cp ../conf/typelist .
-    ./dict_parse_demo -flagfile=../conf/goodcoder.gflags
+    ./dict_parse_demo -flagfile=../conf/goodcoder.gflags 1>../log/out.txt 2>../log/err.txt
 
     [[ $? -ne 0 ]] && log_error "exit with error" || log_info "finished."
 

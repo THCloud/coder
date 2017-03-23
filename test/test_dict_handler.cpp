@@ -4,20 +4,19 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   test_dict_handler.cpp
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/27 13:19:44
- * @brief
+ *
+ * @brief  unit test for dict_handler.h
  *
  **/
 
 #include <gtest/gtest.h>
 #include "dict_handler.h"
-#include "user_define_type.h"
+#include "user/user_define_type.h"
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);

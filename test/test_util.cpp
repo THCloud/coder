@@ -4,14 +4,13 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   test_util.cpp
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/27 12:42:10
- * @brief
+ *
+ * @brief  unit test for util.h
  *
  **/
 

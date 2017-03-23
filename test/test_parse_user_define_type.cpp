@@ -4,20 +4,19 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   test_parse_user_define_type.cpp
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/27 12:56:56
- * @brief
+ *
+ * @brief  unit test for parse_user_define_type.h
  *
  **/
 
 #include <gtest/gtest.h>
 #include "parse_user_define_type.h"
-#include "user_define_type.h"
+#include "user/user_define_type.h"
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);

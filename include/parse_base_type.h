@@ -4,13 +4,12 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   parse_base_type.h
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 11:23:30
+ *
  * @brief  parse base type to value like int, float, char.
  *
  **/

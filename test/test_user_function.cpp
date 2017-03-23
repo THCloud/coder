@@ -4,19 +4,18 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   test_user_function.cpp
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/27 12:48:17
- * @brief
+ *
+ * @brief  unit test for user_define_type.h
  *
  **/
 
 #include <gtest/gtest.h>
-#include "user_define_type.h"
+#include "user/user_define_type.h"
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);

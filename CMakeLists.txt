@@ -8,16 +8,15 @@ set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 
 set(GFLAGS_INCLUDE_DIR "${GFLAGS_ROOT}/include")
 set(GFLAGS_LINK_DIR "${GFLAGS_ROOT}/lib")
-set(GLOG_INCLUDE_DIR "${GLOG_ROOT}/include")
-set(GLOG_LINK_DIR "${GLOG_ROOT}/lib")
+# set(GLOG_INCLUDE_DIR "${GLOG_ROOT}/include")
+# set(GLOG_LINK_DIR "${GLOG_ROOT}/lib")
 
 include_directories(${GFLAGS_INCLUDE_DIR})
-include_directories(${GLOG_INCLUDE_DIR})
+# include_directories(${GLOG_INCLUDE_DIR})
 include_directories(${INCLUDE_DIR})
-include_directories(${INCLUDE_DIR}/user)
 
 link_directories(${GFLAGS_LINK_DIR})
-link_directories(${GLOG_LINK_DIR})
+# link_directories(${GLOG_LINK_DIR})
 
 set(CMAKE_CXX_FLAGS "-g -pipe -W -Wall -fPIC -O2 -Wno-parentheses -rdynamic -std=c++11")
 
@@ -34,7 +33,11 @@ add_executable(
     ${CPP_SOURCE_DIR}/user/user_define_type.cpp
     ${DICT_PARSE_SRC}
 )
-target_link_libraries(dict_parse_demo gflags glog)
+target_link_libraries(
+    dict_parse_demo
+    gflags
+    # glog
+)
 
 if(BUILD_TEST)
     add_subdirectory(test)

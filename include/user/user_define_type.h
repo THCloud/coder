@@ -4,13 +4,12 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   user_define_type.h
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 11:14:52
+ *
  * @brief  statements of user-define type and user-define parse function.
  *         and user will parse dict struct here.
  *         this file should be edit by user, and totally controlled by user.
@@ -18,15 +17,13 @@
  *
  **/
 
-#ifndef C_GOODCODER_USER_DEFINE_TYPE_H
-#define C_GOODCODER_USER_DEFINE_TYPE_H
+#ifndef C_GOODCODER_USER_USER_DEFINE_TYPE_H
+#define C_GOODCODER_USER_USER_DEFINE_TYPE_H
 
 #include <string>
-#include <vector>
-#include <fstream>
-#include <iostream>
 
 #include "dict_handler.h"
+#include "util.h"
 
 namespace user {
 
@@ -47,27 +44,6 @@ struct UserType {
  **/
 goodcoder::ErrorCode user_function(const std::string& str, UserType* user_type);
 
-/**
- * @brief   to parse dict struct file, and save all types in a vector.
- *          type_file should write each column's type to each line.
- *          for example. if target dict struct is :
- *
- *              int    float     char    usertype
- *
- *          then the type_file should be like this:
- *
- *              int
- *              float
- *              char
- *              usertype
- *
- *
- * @param   <type_file>     [in]   target file name that defined dict struct.
- *          <typelist>      [out]  vector to save each type.
- * @return  null.
- **/
-void get_typelist(const std::string& type_file,
-                  std::vector<std::string>& typelist);
 /**
  * @brief   get value with given type and column.
  * @param   <type>        [in]    given specified type.

@@ -4,13 +4,12 @@
  *
  ***********************************************************************/
 
-
-
  /**
  * @file   util.h
  * @author Haoran Li
  * @email  lihaoran02@baidu.com
  * @date   2017/02/24 11:03:36
+ *
  * @brief  common function and constant statement.
  *
  **/
@@ -21,10 +20,14 @@
 #include <string>
 #include <vector>
 
-namespace goodcoder {
-
 #define LOG_INFO(fmt, arg...) \
-    printf("\033[1;32m" fmt "\033[0m\n", ##arg)
+    fprintf(stdout, fmt "\n", ##arg)
+
+#define LOG_ERROR(fmt, arg...) \
+    fprintf(stderr, "Errorinfo: file %s line %d -- " fmt "\n", \
+        __FILE__, __LINE__, ##arg)
+
+namespace goodcoder {
 
 typedef enum {
     OK,
@@ -32,7 +35,8 @@ typedef enum {
     TYPE_NOT_FOUND,
     IS_EMPTY_STR,
     INDEX_OUT_OF_RANGE,
-    MEMORY_ERROR
+    MEMORY_ERROR,
+    COLUMN_NUM_NOT_MATCH
 } ErrorCode;
 
 class Util {
@@ -50,6 +54,14 @@ public:
     static void split(const std::string& str,
                       const std::string& separator,
                       std::vector<std::string>& ret);
+
+    /**
+    * @brief   print error info according error code.
+    * @param   <error_code>        [in]    target error code.
+    * @return  none.
+    **/
+    static void print_error_info(ErrorCode error_code);
+
 };
 
 } // namespace goodcoder
