@@ -65,6 +65,13 @@ public:
                              std::vector<std::string>& typelist);
 
     /**
+     * @brief   print error info according error code.
+     * @param   <error_code>        [in]    target error code.
+     * @return  none.
+     **/
+    static void print_error_info(ErrorCode error_code);
+
+    /**
      * @brief   parse the target index column to specified type.
      * @param   <column>       [in]  target column value.
      *          <value>        [out] the specified type value of column.

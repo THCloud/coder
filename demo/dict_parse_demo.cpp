@@ -50,6 +50,10 @@ int main(int argc, char** argv) {
         if (columns.size() != typelist.size()) {
             ret = goodcoder::COLUMN_NUM_NOT_MATCH;
             goodcoder::Util::print_error_info(ret);
+        // jump current line when error, and print error infos.
+        if (columns.size() != typelist.size()) {
+            ret = goodcoder::COLUMN_NUM_NOT_MATCH;
+            goodcoder::DictHandler::print_error_info(ret);
             continue;
         }
 
@@ -58,6 +62,9 @@ int main(int argc, char** argv) {
             // skip current line when error, and print error infos.
             if (ret != goodcoder::OK) {
                 goodcoder::Util::print_error_info(ret);
+            // jump current line when error, and print error infos.
+            if (ret != goodcoder::OK) {
+                goodcoder::DictHandler::print_error_info(ret);
                 break;
             }
         }

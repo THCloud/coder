@@ -48,9 +48,46 @@ void DictHandler::get_typelist(const std::string& type_file,
             typelist.push_back(type);
         } else {
             LOG_ERROR("empty str in type file. skip the line.");
+        if (!type.empty()) {
+            typelist.push_back(type);
         }
     }
     type_fstream.close();
+}
+
+void DictHandler::print_error_info(ErrorCode error_code) {
+    switch (error_code) {
+        case TYPE_NOT_MATCH: {
+            LOG(ERROR) << "ErrorInfo: target parse data is not match target parse type";
+            break;
+        }
+        case TYPE_NOT_FOUND: {
+            LOG(ERROR) << "ErrorInfo: didn't found matched parse type.";
+            break;
+        }
+        case IS_EMPTY_STR: {
+            LOG(ERROR) << "ErrorInfo: target access data value is an empty string";
+            break;
+        }
+        case INDEX_OUT_OF_RANGE: {
+            LOG(ERROR) << "ErrorInfo: target access index is out of range.";
+            break;
+        }
+        case MEMORY_ERROR: {
+            LOG(ERROR) << "ErrorInfo: error when alloc memory to ptr.";
+            break;
+        }
+        case COLUMN_NUM_NOT_MATCH: {
+            LOG(ERROR) << "ErrorInfo: source data's columns is not matched target columns.";
+            break;
+        }
+        case OK: {
+            break;
+        }
+        default: {
+            break;
+        }
+    }
 }
 
 } // namespace goodcoder
